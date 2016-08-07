@@ -1,6 +1,6 @@
 ![](http://superfantastic.s3.amazonaws.com/zak-fisher/landing-page.png)
 
-Zak Fisher's Website
+FreshTomatoes - Movie Reviews
 =====
 A full JavaScript stack built with Node, Express, React, Reflux, Gulp, JSX, ES6, Jade, and SCSS.
 
