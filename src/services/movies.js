@@ -1,12 +1,11 @@
 'use strict'
 
-const Service = require('./service')
-const MoviesCollection = require('./data/movies-collection')
+const Collection = require('./collection')
+const MoviesData = require('./data/movies-data')
 
-class Movies extends Service {
+class Movies extends Collection {
   constructor() {
-    super('movies')
-    this.collection = MoviesCollection
+    super('movies', MoviesData)
   }
 }
 

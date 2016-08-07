@@ -1,4 +1,4 @@
-![](http://superfantastic.s3.amazonaws.com/zak-fisher/landing-page.png)
+![](http://superfantastic.s3.amazonaws.com/movie-reviews/landing-page.jpg)
 
 FreshTomatoes - Movie Reviews
 =====

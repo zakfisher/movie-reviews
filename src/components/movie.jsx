@@ -1,3 +1,5 @@
+// const MoviesActions = require('../services/data/movies-actions.jsx')
+// const MoviesStore = require('../services/data/movies-store.jsx')
 const Poster = require('./poster.jsx')
 
 const MovieInfo = React.createClass({

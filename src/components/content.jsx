@@ -1,19 +1,28 @@
+const MoviesActions = require('../services/data/movies-actions.jsx')
+const MoviesStore = require('../services/data/movies-store.jsx')
 const Movie = require('./movie.jsx')
 
 const Content = React.createClass({
-  getDefaultProps: function() {
+  componentWillMount: function() {
+    MoviesStore.listen(this.update)
+  },
+  getInitialState: function() {
     return {
       movie: {}
     }
   },
-  getInitialState: function() {
-    return {}
+  update: function(data) {
+    switch (data.action) {
+      case 'set current movie':
+        this.setState({ movie: data.movie })
+        break
+    }
   },
   render: function() {
     return (
       <main className='content'>
         <div className="wrap">
-          <Movie movie={this.props.movie} />
+          <Movie movie={this.state.movie} />
         </div>
       </main>
     )
