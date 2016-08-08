@@ -13,11 +13,13 @@ const Result = React.createClass({
   },
   render: function() {
     const result = this.props.result
-    // <img src={result.poster} />
     return (
       <li onClick={this.click}>
-        <h3>{result.movie_name}</h3>
-        <Rating rating={result.rating} />
+        <img src={result.poster} />
+        <div>
+          <h3>{result.movie_name}</h3>
+          <Rating rating={result.rating} />
+        </div>
       </li>
     )
   }

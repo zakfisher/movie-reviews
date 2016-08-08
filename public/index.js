@@ -10058,11 +10058,13 @@ const Result = React.createClass({displayName: "Result",
   },
   render: function() {
     const result = this.props.result
-    // <img src={result.poster} />
     return (
       React.createElement("li", {onClick: this.click}, 
-        React.createElement("h3", null, result.movie_name), 
-        React.createElement(Rating, {rating: result.rating})
+        React.createElement("img", {src: result.poster}), 
+        React.createElement("div", null, 
+          React.createElement("h3", null, result.movie_name), 
+          React.createElement(Rating, {rating: result.rating})
+        )
       )
     )
   }

@@ -146,10 +146,34 @@ $contentPadding: rem(20);
 
   .results {
     li {
+      @include transition(background 300ms ease);
+      cursor: pointer;
+      background: #eee;
       border: 1px solid #ccc;
       border-top: none;
-      height: rem(100);
+      // height: rem(100);
+      overflow: auto;
       width: 100%;
+      position: relative;
+
+      img {
+        float: left;
+        width: rem(50);
+        margin-right: rem(10);
+      }
+
+      > div {
+        float: left;
+        width: calc(100% - 7rem);
+      }
+
+      .rating {
+        margin: rem(10) 0 0;
+      }
+
+      &:hover {
+        background: #ccc;
+      }
     }
   }
 }
