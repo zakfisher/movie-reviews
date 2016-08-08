@@ -238,6 +238,42 @@
       .row > [class*="col-"].hi-res-20 {
         width: 20%; } }
 
+html:before {
+  border: 1px solid #333;
+  border-radius: 4px;
+  position: fixed;
+  z-index: 5000;
+  color: darkturquoise;
+  background: black;
+  font-size: 12px;
+  bottom: 10px;
+  right: 10px;
+  padding: 5px 10px; }
+  @media all and (min-width: 0px) {
+    html:before {
+      content: "col (0px)"; } }
+  @media all and (min-width: 320px) {
+    html:before {
+      content: "mob (320px)"; } }
+  @media all and (min-width: 375px) {
+    html:before {
+      content: "mob-m (375px)"; } }
+  @media all and (min-width: 425px) {
+    html:before {
+      content: "mob-l (425px)"; } }
+  @media all and (min-width: 768px) {
+    html:before {
+      content: "tab (768px)"; } }
+  @media all and (min-width: 1024px) {
+    html:before {
+      content: "lap (1024px)"; } }
+  @media all and (min-width: 1440px) {
+    html:before {
+      content: "desk (1440px)"; } }
+  @media all and (min-width: 2560px) {
+    html:before {
+      content: "hi-res (2560px)"; } }
+
 * {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -277,24 +313,79 @@ html, body {
   top: 0;
   left: 0;
   z-index: 10; }
+  .nav .logo {
+    height: 100%;
+    width: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer; }
+    .nav .logo img, .nav .logo p, .nav .logo span {
+      cursor: pointer;
+      float: left; }
+    .nav .logo img {
+      height: 100%;
+      padding: 0.75rem; }
+    .nav .logo p {
+      display: flex;
+      align-items: center;
+      font-size: 1.625rem;
+      height: 100%; }
+  .nav .links {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: green;
+    width: 50%;
+    height: 100%; }
+    .nav .links li {
+      cursor: pointer;
+      float: left;
+      height: 100%;
+      width: 25%;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+
+.hero {
+  position: fixed;
+  top: 3.75rem;
+  left: 0;
+  background: #222;
+  height: 60vh;
+  width: 100%; }
+
+.content {
+  position: relative;
+  top: 60vh;
+  margin-top: 3.75rem;
+  min-height: 62.5rem;
+  height: auto;
+  width: 100%;
+  background: white;
+  border-top: 0.625rem solid crimson;
+  padding: 1.25rem; }
+  .content .row {
+    height: auto; }
 
 .search {
-  background: crimson;
-  position: fixed;
-  z-index: 10;
-  height: 2.5rem;
-  width: 19.5rem;
-  right: 1.25rem;
-  top: 5rem;
-  cursor: text; }
+  position: relative;
+  padding-top: 1.25rem; }
+  @media all and (min-width: 1024px) {
+    .search {
+      padding-left: 1.25rem;
+      padding-top: 0; } }
+  .search input, .search .results li {
+    padding: 0.625rem; }
   .search input {
     height: 100%;
     width: 100%;
     background: black;
-    padding: 0.625rem;
     font-size: 1.25rem;
     line-height: 2.5rem;
-    color: white; }
+    color: white;
+    height: 2.5rem !important;
+    width: 100%; }
     .search input::-webkit-input-placeholder {
       color: #aaa;
       font-style: italic; }
@@ -307,18 +398,30 @@ html, body {
     .search input:-ms-input-placeholder {
       color: #aaa;
       font-style: italic; }
+  .search .results li {
+    border: 1px solid #ccc;
+    border-top: none;
+    height: 6.25rem;
+    width: 100%; }
 
-.hero {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: #222;
-  height: 50vh;
-  width: 100%; }
+.movie .poster {
+  float: left;
+  margin-right: 1.25rem;
+  background: black;
+  padding: 1.25rem; }
 
-.content {
-  position: relative;
-  top: 50vh;
-  width: 100%;
-  background: white;
-  border-top: 0.625rem solid crimson; }
+.movie .info {
+  float: left;
+  width: calc(100% - 15rem); }
+  .movie .info h1 {
+    font-size: 2.875rem;
+    line-height: 2.875rem; }
+
+.rating {
+  display: inline-block;
+  padding: 0.1875rem 0.625rem;
+  margin: 0.9375rem 0; }
+  .rating p {
+    color: white;
+    font-size: 0.875rem;
+    font-style: italic; }

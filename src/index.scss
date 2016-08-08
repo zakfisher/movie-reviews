@@ -23,12 +23,7 @@ html, body {
 }
 
 #app, #app > div {
-  // height: 100%;
-  // width: 100%;
   position: relative;
-  // @include breakpoint(tab) {
-  //   position: fixed;
-  // }
 }
 
 #app > div {
@@ -39,7 +34,8 @@ html, body {
 }
 
 $navHeight: rem(60);
-$heroHeight: 50vh;
+$heroHeight: 60vh;
+$contentPadding: rem(20);
 
 .nav {
   background: black;
@@ -49,34 +45,56 @@ $heroHeight: 50vh;
   top: 0;
   left: 0;
   z-index: 10;
-}
 
-.search {
-  background: crimson;
-  position: fixed;
-  z-index: 10;
-  height: rem(40);
-  width: rem(312);
-  right: rem(20);
-  top: $navHeight + rem(20);
-  cursor: text;
-  input {
-    @include size(100%);
-    background: black;
-    padding: rem(10);
-    font-size: rem(20);
-    line-height: rem(40);
-    color: white;
-    @include placeholder {
-      color: #aaa;
-      font-style: italic;
+  .logo {
+    height: 100%;
+    width: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+
+    img, p, span {
+      cursor: pointer;
+      float: left;
+    }
+
+    img {
+      height: 100%;
+      padding: rem(12);
+    }
+
+    p {
+      display: flex;
+      align-items: center;
+      font-size: rem(26);
+      height: 100%;
+    }
+  }
+
+  .links {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: green;
+    width: 50%;
+    height: 100%;
+
+    li {
+      cursor: pointer;
+      float: left;
+      height: 100%;
+      width: 25%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
 
 .hero {
   position: fixed;
-  top: 0;
+  top: $navHeight;
   left: 0;
   background: #222;
   height: $heroHeight;
@@ -86,7 +104,83 @@ $heroHeight: 50vh;
 .content {
   position: relative;
   top: $heroHeight;
+  margin-top: $navHeight;
+  min-height: rem(1000);
+  height: auto;
   width: 100%;
   background: white;
   border-top: rem(10) solid crimson;
+  padding: $contentPadding;
+
+  .row {
+    height: auto;
+  }
+}
+
+.search {
+  position: relative;
+  padding-top: $contentPadding;
+  @include breakpoint(lap) {
+    padding-left: $contentPadding;
+    padding-top: 0;
+  }
+
+  input, .results li {
+    padding: rem(10);
+  }
+
+  input {
+    @include size(100%);
+    background: black;
+    font-size: rem(20);
+    line-height: rem(40);
+    color: white;
+    height: rem(40) !important;
+    width: 100%;
+
+    @include placeholder {
+      color: #aaa;
+      font-style: italic;
+    }
+  }
+
+  .results {
+    li {
+      border: 1px solid #ccc;
+      border-top: none;
+      height: rem(100);
+      width: 100%;
+    }
+  }
+}
+
+.movie {
+  .poster {
+    float: left;
+    margin-right: $contentPadding;
+    background: black;
+    padding: rem(20);
+  }
+
+  .info {
+    float: left;
+    width: calc(100% - 15rem);
+
+    h1 {
+      font-size: rem(46);
+      line-height: rem(46);
+    }
+  }
+}
+
+.rating {
+  display: inline-block;
+  padding: rem(3) rem(10);
+  margin: rem(15) 0;
+
+  p {
+    color: white;
+    font-size: rem(14);
+    font-style: italic;
+  }
 }

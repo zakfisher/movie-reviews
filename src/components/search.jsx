@@ -24,8 +24,8 @@ const Search = React.createClass({
   },
   render: function() {
     return (
-      <div className='search'>
-        <input type='text' placeholder='Search' name='query' ref='query' onKeyUp={this.searchByQuery} onFocus={MoviesActions.showResults} onBlur={MoviesActions.hideResults} />
+      <div className={'search ' + this.props.grid}>
+        <input type='text' placeholder='Search' name='query' ref='query' onKeyUp={this.searchByQuery} onFocus={MoviesActions.showResults} />
         <Results results={this.state.results} />
       </div>
     )

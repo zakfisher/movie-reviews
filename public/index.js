@@ -9800,7 +9800,6 @@ module.exports = function(listenables){
 
 },{"reflux-core/lib/ListenerMethods":46}],62:[function(require,module,exports){
 const Nav = require('./components/nav.jsx')
-const Search = require('./components/search.jsx')
 const Hero = require('./components/hero.jsx')
 const Content = require('./components/content.jsx')
 
@@ -9809,7 +9808,6 @@ const App = React.createClass({displayName: "App",
     return (
       React.createElement("div", {className: "row"}, 
         React.createElement(Nav, null), 
-        React.createElement(Search, null), 
         React.createElement(Hero, null), 
         React.createElement(Content, null)
       )
@@ -9819,9 +9817,10 @@ const App = React.createClass({displayName: "App",
 
 module.exports = App
 
-},{"./components/content.jsx":63,"./components/hero.jsx":64,"./components/nav.jsx":66,"./components/search.jsx":69}],63:[function(require,module,exports){
+},{"./components/content.jsx":63,"./components/hero.jsx":64,"./components/nav.jsx":66}],63:[function(require,module,exports){
 const MoviesActions = require('../services/data/movies-actions.jsx')
 const MoviesStore = require('../services/data/movies-store.jsx')
+const Search = require('./search.jsx')
 const Movie = require('./movie.jsx')
 
 const Content = React.createClass({displayName: "Content",
@@ -9843,8 +9842,9 @@ const Content = React.createClass({displayName: "Content",
   render: function() {
     return (
       React.createElement("main", {className: "content"}, 
-        React.createElement("div", {className: "wrap"}, 
-          React.createElement(Movie, {movie: this.state.movie})
+        React.createElement("div", {className: "row"}, 
+          React.createElement(Movie, {grid: "col-12 lap-8", movie: this.state.movie}), 
+          React.createElement(Search, {grid: "col-12 lap-4"})
         )
       )
     )
@@ -9853,7 +9853,7 @@ const Content = React.createClass({displayName: "Content",
 
 module.exports = Content
 
-},{"../services/data/movies-actions.jsx":71,"../services/data/movies-store.jsx":72,"./movie.jsx":65}],64:[function(require,module,exports){
+},{"../services/data/movies-actions.jsx":72,"../services/data/movies-store.jsx":73,"./movie.jsx":65,"./search.jsx":70}],64:[function(require,module,exports){
 const MoviesActions = require('../services/data/movies-actions.jsx')
 const MoviesStore = require('../services/data/movies-store.jsx')
 
@@ -9861,25 +9861,30 @@ const Hero = React.createClass({displayName: "Hero",
   componentWillMount: function() {
     MoviesStore.listen(this.update)
   },
-  // componentDidMount: function() {
-  //   setTimeout(function() {
-  //     MoviesActions.setMovieByIndex(2)
-  //   }, 3000)
-  // },
+  componentDidMount: function() {
+    const _this = this
+    window.addEventListener('scroll', function(e) {
+      var percentOffsetY = ((window.pageYOffset / window.innerHeight) * -25) + 'vh'
+      _this.setState({ yOffsetPercent: percentOffsetY })
+      _this.setState({ style: _this.getStyle(_this.state.currentMovie) })
+    })
+  },
   getInitialState: function() {
     return {
+      yOffsetPercent: 0,
       movie: {},
       style: {},
     }
   },
   getStyle: function(movie) {
     return {
-      background: 'url(' + movie.hero + ') center center / cover no-repeat',
+      background: 'url(' + movie.hero + ') center ' + this.state.yOffsetPercent + ' / cover no-repeat',
     }
   },
   update: function(data) {
     switch (data.action) {
       case 'set current movie':
+        this.setState({ currentMovie: data.movie })
         this.setState({ style: this.getStyle(data.movie) })
         break
     }
@@ -9893,17 +9898,18 @@ const Hero = React.createClass({displayName: "Hero",
 
 module.exports = Hero
 
-},{"../services/data/movies-actions.jsx":71,"../services/data/movies-store.jsx":72}],65:[function(require,module,exports){
-// const MoviesActions = require('../services/data/movies-actions.jsx')
-// const MoviesStore = require('../services/data/movies-store.jsx')
+},{"../services/data/movies-actions.jsx":72,"../services/data/movies-store.jsx":73}],65:[function(require,module,exports){
 const Poster = require('./poster.jsx')
+const Rating = require('./rating.jsx')
 
 const MovieInfo = React.createClass({displayName: "MovieInfo",
   render: function() {
+    const movie = this.props.movie
     return (
-      React.createElement("div", null, 
-        React.createElement("h1", null, this.props.movie.movie_name), 
-        React.createElement("p", null, this.props.movie.description)
+      React.createElement("div", {className: "info"}, 
+        React.createElement("h1", null, movie.movie_name), 
+        React.createElement(Rating, {rating: movie.rating}), 
+        React.createElement("p", null, movie.description)
       )
     )
   }
@@ -9918,7 +9924,7 @@ const Movie = React.createClass({displayName: "Movie",
   },
   render: function() {
     return (
-      React.createElement("article", {className: "movie"}, 
+      React.createElement("article", {className: 'movie ' + this.props.grid}, 
         React.createElement(Poster, {movie: this.props.movie}), 
         React.createElement(MovieInfo, {movie: this.props.movie})
       )
@@ -9928,17 +9934,66 @@ const Movie = React.createClass({displayName: "Movie",
 
 module.exports = Movie
 
-},{"./poster.jsx":67}],66:[function(require,module,exports){
+},{"./poster.jsx":67,"./rating.jsx":68}],66:[function(require,module,exports){
+const NavLogo = React.createClass({displayName: "NavLogo",
+  render: function() {
+    return (
+      React.createElement("a", {href: "/", className: "logo"}, 
+        React.createElement("img", {src: "/images/tomato.png"}), 
+        React.createElement("p", null, 
+          React.createElement("span", {style:  {color: 'white', fontStyle: 'italic'} }, "Fresh"), 
+          React.createElement("span", {style:  {color: 'green', fontWeight: 'bold'} }, "Tomatoes")
+        )
+      )
+    )
+  }
+})
+
+const NavLinkItem = React.createClass({displayName: "NavLinkItem",
+  render: function() {
+    const link = this.props.link
+    return (
+      React.createElement("li", {className: this.props.isSelected ? 'active' : ''}, 
+        React.createElement("a", {href: link.href}, link.text)
+      )
+    )
+  }
+})
+
+const NavLinks = React.createClass({displayName: "NavLinks",
+  render: function() {
+    return (
+      React.createElement("ul", {className: "links"}, 
+        this.props.links.map(function(link, i) {
+          return React.createElement(NavLinkItem, {link: link, key: i, isSelected: true})
+        })
+      )
+    )
+  }
+})
+
 const Nav = React.createClass({displayName: "Nav",
   getDefaultProps: function() {
-    return {}
+    return {
+      links: [
+       { text: 'Movie Times', href: '/movie-times' },
+       { text: 'Theatres', href: '/theatres' },
+       { text: 'Reviews', href: '/reviews' },
+       { text: 'Sign In', href: '/login' },
+      ]
+    }
   },
   getInitialState: function() {
-    return {}
+    return {
+      currentItemIndex: 0
+    }
   },
   render: function() {
     return (
-      React.createElement("nav", {className: "nav"})
+      React.createElement("nav", {className: "nav"}, 
+        React.createElement(NavLogo, null), 
+        React.createElement(NavLinks, {links: this.props.links})
+      )
     )
   }
 })
@@ -9965,8 +10020,32 @@ const Poster = React.createClass({displayName: "Poster",
 module.exports = Poster
 
 },{}],68:[function(require,module,exports){
+const Rating = React.createClass({displayName: "Rating",
+  getDescription: function() {
+    var desc = 'FRESH'
+    return desc
+  },
+  getStyle: function() {
+    var bg = 'green'
+    return {
+      background: bg
+    }
+  },
+  render: function() {
+    return (
+      React.createElement("div", {className: "rating", style: this.getStyle()}, 
+        React.createElement("p", null, this.getDescription())
+      )
+    )
+  }
+})
+
+module.exports = Rating
+
+},{}],69:[function(require,module,exports){
 const MoviesActions = require('../services/data/movies-actions.jsx')
 const MoviesStore = require('../services/data/movies-store.jsx')
+const Rating = require('./rating.jsx')
 
 const Result = React.createClass({displayName: "Result",
   getDefaultProps: function() {
@@ -9974,12 +10053,16 @@ const Result = React.createClass({displayName: "Result",
       result: {}
     }
   },
+  click: function() {
+    MoviesActions.setCurrentMovie(this.props.result)
+  },
   render: function() {
+    const result = this.props.result
+    // <img src={result.poster} />
     return (
-      React.createElement("li", null, 
-        React.createElement("img", {src: this.props.result.poster}), 
-        React.createElement("h3", null, this.props.result.movie_name), 
-        React.createElement("p", null, "Fresh")
+      React.createElement("li", {onClick: this.click}, 
+        React.createElement("h3", null, result.movie_name), 
+        React.createElement(Rating, {rating: result.rating})
       )
     )
   }
@@ -9991,40 +10074,33 @@ const Results = React.createClass({displayName: "Results",
   },
   getInitialState: function() {
     return {
-      results: [],
-      showResults: false
+      results: []
     }
   },
   update: function(data) {
     switch (data.action) {
+      case 'movies loaded':
+        this.setState({ results: data.collection })
+        break
       case 'movies by query':
         this.setState({ results: data.results })
-        break
-      case 'hide results':
-        this.setState({ showResults: false })
-        break
-      case 'show results':
-        this.setState({ showResults: true })
         break
     }
   },
   render: function() {
-    if (this.state.showResults) {
-      return (
-        React.createElement("ul", {className: "results"}, 
-          this.state.results.map(function(result, i) {
-            return React.createElement(Result, {result: result, key: i})
-          })
-        )
+    return (
+      React.createElement("ul", {className: "results", onMouseEnter: MoviesActions.showResults}, 
+        this.state.results.map(function(result, i) {
+          return React.createElement(Result, {result: result, key: i})
+        })
       )
-    }
-    else return React.createElement("ul", {style:  { display: 'none'} })
+    )
   }
 })
 
 module.exports = Results
 
-},{"../services/data/movies-actions.jsx":71,"../services/data/movies-store.jsx":72}],69:[function(require,module,exports){
+},{"../services/data/movies-actions.jsx":72,"../services/data/movies-store.jsx":73,"./rating.jsx":68}],70:[function(require,module,exports){
 const MoviesActions = require('../services/data/movies-actions.jsx')
 const MoviesStore = require('../services/data/movies-store.jsx')
 const Results = require('./results.jsx')
@@ -10051,8 +10127,8 @@ const Search = React.createClass({displayName: "Search",
   },
   render: function() {
     return (
-      React.createElement("div", {className: "search"}, 
-        React.createElement("input", {type: "text", placeholder: "Search", name: "query", ref: "query", onKeyUp: this.searchByQuery, onFocus: MoviesActions.showResults, onBlur: MoviesActions.hideResults}), 
+      React.createElement("div", {className: 'search ' + this.props.grid}, 
+        React.createElement("input", {type: "text", placeholder: "Search", name: "query", ref: "query", onKeyUp: this.searchByQuery, onFocus: MoviesActions.showResults}), 
         React.createElement(Results, {results: this.state.results})
       )
     )
@@ -10061,7 +10137,7 @@ const Search = React.createClass({displayName: "Search",
 
 module.exports = Search
 
-},{"../services/data/movies-actions.jsx":71,"../services/data/movies-store.jsx":72,"./results.jsx":68}],70:[function(require,module,exports){
+},{"../services/data/movies-actions.jsx":72,"../services/data/movies-store.jsx":73,"./results.jsx":69}],71:[function(require,module,exports){
 const App = require('./app.jsx')
 
 ReactDOM.render(
@@ -10069,20 +10145,18 @@ ReactDOM.render(
   document.getElementById('app')
 )
 
-},{"./app.jsx":62}],71:[function(require,module,exports){
+},{"./app.jsx":62}],72:[function(require,module,exports){
 const Reflux = require('reflux')
 
 const MoviesActions = Reflux.createActions([
   'setCurrentMovie',
   'setMovieByIndex',
   'getMoviesByQuery',
-  'hideResults',
-  'showResults',
 ])
 
 module.exports = MoviesActions
 
-},{"reflux":59}],72:[function(require,module,exports){
+},{"reflux":59}],73:[function(require,module,exports){
 const request = require('ajax-request')
 const Reflux = require('reflux')
 const MoviesActions = require('./movies-actions.jsx')
@@ -10115,6 +10189,12 @@ const MoviesStore = Reflux.createStore({
 
       // Set default movie
       MoviesActions.setMovieByIndex(_this.data.defaultMovieIndex)
+
+      // Trigger data loaded event
+      _this.trigger({
+        action: 'movies loaded',
+        collection: collection
+      })
     })
   },
   onGetMoviesByQuery: function(query) {
@@ -10141,14 +10221,8 @@ const MoviesStore = Reflux.createStore({
       movie: movie
     })
   },
-  onHideResults: function() {
-    this.trigger({ action: 'hide results' })
-  },
-  onShowResults: function() {
-    this.trigger({ action: 'show results' })
-  },
 })
 
 module.exports = MoviesStore
 
-},{"./movies-actions.jsx":71,"ajax-request":1,"reflux":59}]},{},[70]);
+},{"./movies-actions.jsx":72,"ajax-request":1,"reflux":59}]},{},[71]);

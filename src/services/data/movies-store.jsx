@@ -30,6 +30,12 @@ const MoviesStore = Reflux.createStore({
 
       // Set default movie
       MoviesActions.setMovieByIndex(_this.data.defaultMovieIndex)
+
+      // Trigger data loaded event
+      _this.trigger({
+        action: 'movies loaded',
+        collection: collection
+      })
     })
   },
   onGetMoviesByQuery: function(query) {
@@ -55,12 +61,6 @@ const MoviesStore = Reflux.createStore({
       action: 'set current movie',
       movie: movie
     })
-  },
-  onHideResults: function() {
-    this.trigger({ action: 'hide results' })
-  },
-  onShowResults: function() {
-    this.trigger({ action: 'show results' })
   },
 })
 

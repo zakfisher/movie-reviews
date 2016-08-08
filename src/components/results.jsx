@@ -1,5 +1,6 @@
 const MoviesActions = require('../services/data/movies-actions.jsx')
 const MoviesStore = require('../services/data/movies-store.jsx')
+const Rating = require('./rating.jsx')
 
 const Result = React.createClass({
   getDefaultProps: function() {
@@ -7,12 +8,16 @@ const Result = React.createClass({
       result: {}
     }
   },
+  click: function() {
+    MoviesActions.setCurrentMovie(this.props.result)
+  },
   render: function() {
+    const result = this.props.result
+    // <img src={result.poster} />
     return (
-      <li>
-        <img src={this.props.result.poster} />
-        <h3>{this.props.result.movie_name}</h3>
-        <p>Fresh</p>
+      <li onClick={this.click}>
+        <h3>{result.movie_name}</h3>
+        <Rating rating={result.rating} />
       </li>
     )
   }
@@ -24,34 +29,27 @@ const Results = React.createClass({
   },
   getInitialState: function() {
     return {
-      results: [],
-      showResults: false
+      results: []
     }
   },
   update: function(data) {
     switch (data.action) {
+      case 'movies loaded':
+        this.setState({ results: data.collection })
+        break
       case 'movies by query':
         this.setState({ results: data.results })
-        break
-      case 'hide results':
-        this.setState({ showResults: false })
-        break
-      case 'show results':
-        this.setState({ showResults: true })
         break
     }
   },
   render: function() {
-    if (this.state.showResults) {
-      return (
-        <ul className='results'>
-          {this.state.results.map(function(result, i) {
-            return <Result result={result} key={i} />
-          })}
-        </ul>
-      )
-    }
-    else return <ul style={ { display: 'none' } }></ul>
+    return (
+      <ul className='results' onMouseEnter={MoviesActions.showResults}>
+        {this.state.results.map(function(result, i) {
+          return <Result result={result} key={i} />
+        })}
+      </ul>
+    )
   }
 })
 
