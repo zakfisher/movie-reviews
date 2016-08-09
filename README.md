@@ -1,4 +1,4 @@
-![](http://superfantastic.s3.amazonaws.com/movie-reviews/landing-page.jpg)
+![](http://superfantastic.s3.amazonaws.com/movie-reviews/landing.jpg)
 
 FreshTomatoes - Movie Reviews
 =====
