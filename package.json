@@ -1,7 +1,7 @@
 {
-  "name": "zak-fisher.com",
+  "name": "zf-movie-reviews",
   "version": "1.0.0",
-  "description": "Zak Fisher Website",
+  "description": "FreshTomatoes Movie Reviews",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/zakfisher/zak-fisher.com.git"
+    "url": "git+ssh://git@github.com/zakfisher/movie-reviews.git"
   },
   "author": "Zak Fisher <zak@super-fantastic.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zakfisher/zak-fisher.com/issues"
+    "url": "https://github.com/zakfisher/movie-reviews/issues"
   },
-  "homepage": "https://zak-fisher.herokuapp.com/",
+  "homepage": "https://zf-movie-reviews.herokuapp.com/",
   "dependencies": {
     "ajax-request": "^1.2.1",
     "body-parser": "^1.15.2",

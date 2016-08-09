@@ -18,7 +18,7 @@ Download dependencies with `npm i`.
 
 ## Server
 
-On production, Heroku runs `node index.js`, which is our [server entry point](https://github.com/zakfisher/zak-fisher.com/blob/master/index.js).
+On production, Heroku runs `node index.js`, which is our [server entry point](https://github.com/zakfisher/movie-reviews/blob/master/index.js).
 
 In dev, we run `gulp`, which
 * starts the express server at [localhost:4200](http://localhost:4200)
@@ -29,26 +29,24 @@ In dev, we run `gulp`, which
 
 ## Client
 
-The page markup is served from [`src/index.jade`](https://github.com/zakfisher/zak-fisher.com/blob/master/src/index.jade) (so we can pass server data directly into the dom).
+The page markup is served from [`src/index.jade`](https://github.com/zakfisher/movie-reviews/blob/master/src/index.jade) (so we can pass server data directly into the dom).
 
-The React app's entry point is at [`src/index.jsx`](https://github.com/zakfisher/zak-fisher.com/blob/master/src/index.jsx).
+The React app's entry point is at [`src/index.jsx`](https://github.com/zakfisher/movie-reviews/blob/master/src/index.jsx).
 
-One CSS file is compiled from [`src/index.scss`](https://github.com/zakfisher/zak-fisher.com/blob/master/src/index.scss).
+One CSS file is compiled from [`src/index.scss`](https://github.com/zakfisher/movie-reviews/blob/master/src/index.scss).
 
 ## Key Features
 
 There are a few noteworthy features, including:
-* [A Gulp workflow with LiveReload](https://github.com/zakfisher/zak-fisher.com/blob/master/gulpfile.js)
-* [Twitter API integration with OAuth](https://github.com/zakfisher/zak-fisher.com/blob/master/src/services/twitter.js)
-  * You can check [localhost:4200/tweet](http://localhost:4200/tweet) to see the latest tweet (assuming you're running the app locally)
-* [Email API integration with SendGrid](https://github.com/zakfisher/zak-fisher.com/blob/master/src/services/email.js)
-* [React Form validation using Reflux](https://github.com/zakfisher/zak-fisher.com/blob/master/src/components/form.jsx)
-* [A Custom SCSS Grid Framework](https://github.com/zakfisher/zak-fisher.com/blob/master/src/components/grid.scss)
+* [A Gulp workflow with LiveReload](https://github.com/zakfisher/movie-reviews/blob/master/gulpfile.js)
+* [A React Hero w/ Parallax](https://github.com/zakfisher/movie-reviews/blob/master/src/components/hero.jsx)
+* [A Reflux Movies Store](https://github.com/zakfisher/movie-reviews/blob/master/src/services/data/movies-store.jsx)
+* [A Custom SCSS Grid Framework](https://github.com/zakfisher/movie-reviews/blob/master/src/components/grid.scss)
 
 ## Future Development
 
 Some features that still need to be implemented include:
-* A modal with project information
+* Integration with Firebase
 * Additional content & pages
 * Server-side rendering
 * Client-side routing
