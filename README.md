@@ -4,7 +4,7 @@ FreshTomatoes - Movie Reviews
 =====
 A full JavaScript stack built with Node, Express, React, Reflux, Gulp, JSX, ES6, Jade, and SCSS.
 
-It is hosted on Heroku at [zak-fisher.com](http://zak-fisher.com).
+It is hosted on Heroku at [zf-movie-reviews.herokuapp.com](https://zf-movie-reviews.herokuapp.com/).
 
 ## Installation
 

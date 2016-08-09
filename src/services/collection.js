@@ -5,11 +5,11 @@ class Collection {
     this.name = name
     this.data = {}
     this.mockData = data
-    this.setData()
+    this.init()
   }
 
   // Get collection from firebase, otherwise use mock data.
-  setData() {
+  init() {
     // Get collection from firebase
 
     // Use mock data
@@ -21,7 +21,9 @@ class Collection {
     return this.data
   }
 
-  getById() {}
+  getById() {
+    // Get model from this.data || firebase
+  }
 }
 
 module.exports = Collection
