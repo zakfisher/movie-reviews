@@ -76,7 +76,6 @@ $contentPadding: rem(20);
     position: absolute;
     top: 0;
     right: 0;
-    background: green;
     width: 50%;
     height: 100%;
 
@@ -109,7 +108,7 @@ $contentPadding: rem(20);
   height: auto;
   width: 100%;
   background: white;
-  border-top: rem(10) solid crimson;
+  border-top: rem(10) solid #af050c;
   padding: $contentPadding;
 
   .row {
@@ -151,10 +150,11 @@ $contentPadding: rem(20);
       background: #eee;
       border: 1px solid #ccc;
       border-top: none;
-      // height: rem(100);
       overflow: auto;
       width: 100%;
       position: relative;
+      font-size: rem(14);
+      line-height: rem(18);
 
       img {
         float: left;

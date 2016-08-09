@@ -7,7 +7,7 @@ const MovieInfo = React.createClass({
     return (
       <div className='info'>
         <h1>{movie.movie_name}</h1>
-        <Rating rating={movie.rating} />
+        <Rating movie={movie} />
         <p>{movie.description}</p>
       </div>
     )

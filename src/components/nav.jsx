@@ -5,7 +5,7 @@ const NavLogo = React.createClass({
         <img src='/images/tomato.png' />
         <p>
           <span style={ {color: 'white', fontStyle: 'italic'} }>Fresh</span>
-          <span style={ {color: 'green', fontWeight: 'bold'} }>Tomatoes</span>
+          <span style={ {color: '#6ba954', fontWeight: 'bold', marginLeft: '0.3rem'} }>Tomatoes</span>
         </p>
       </a>
     )

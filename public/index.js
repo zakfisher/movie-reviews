@@ -9908,7 +9908,7 @@ const MovieInfo = React.createClass({displayName: "MovieInfo",
     return (
       React.createElement("div", {className: "info"}, 
         React.createElement("h1", null, movie.movie_name), 
-        React.createElement(Rating, {rating: movie.rating}), 
+        React.createElement(Rating, {movie: movie}), 
         React.createElement("p", null, movie.description)
       )
     )
@@ -9942,7 +9942,7 @@ const NavLogo = React.createClass({displayName: "NavLogo",
         React.createElement("img", {src: "/images/tomato.png"}), 
         React.createElement("p", null, 
           React.createElement("span", {style:  {color: 'white', fontStyle: 'italic'} }, "Fresh"), 
-          React.createElement("span", {style:  {color: 'green', fontWeight: 'bold'} }, "Tomatoes")
+          React.createElement("span", {style:  {color: '#6ba954', fontWeight: 'bold', marginLeft: '0.3rem'} }, "Tomatoes")
         )
       )
     )
@@ -10011,7 +10011,8 @@ const Poster = React.createClass({displayName: "Poster",
   render: function() {
     return (
       React.createElement("figure", {className: "poster"}, 
-        React.createElement("img", {src: this.props.movie.poster})
+        React.createElement("img", {src: this.props.movie.poster}), 
+        React.createElement("p", {style: {color:'white'}}, this.props.movie.rating)
       )
     )
   }
@@ -10021,17 +10022,21 @@ module.exports = Poster
 
 },{}],68:[function(require,module,exports){
 const Rating = React.createClass({displayName: "Rating",
+  green: '#6ba954',
+  yellow: '#bec019',
+  red: '#af050c',
   getDescription: function() {
     var desc = 'FRESH'
     return desc
   },
   getStyle: function() {
-    var bg = 'green'
+    var bg = this.green
     return {
       background: bg
     }
   },
   render: function() {
+    console.log('rating', this.props)
     return (
       React.createElement("div", {className: "rating", style: this.getStyle()}, 
         React.createElement("p", null, this.getDescription())

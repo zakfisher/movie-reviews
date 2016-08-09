@@ -9,6 +9,7 @@ const Poster = React.createClass({
     return (
       <figure className='poster'>
         <img src={this.props.movie.poster} />
+        <p style={{color:'white'}}>{this.props.movie.rating}</p>
       </figure>
     )
   }

@@ -335,7 +335,6 @@ html, body {
     position: absolute;
     top: 0;
     right: 0;
-    background: green;
     width: 50%;
     height: 100%; }
     .nav .links li {
@@ -363,7 +362,7 @@ html, body {
   height: auto;
   width: 100%;
   background: white;
-  border-top: 0.625rem solid crimson;
+  border-top: 0.625rem solid #af050c;
   padding: 1.25rem; }
   .content .row {
     height: auto; }
@@ -408,7 +407,9 @@ html, body {
     border-top: none;
     overflow: auto;
     width: 100%;
-    position: relative; }
+    position: relative;
+    font-size: 0.875rem;
+    line-height: 1.125rem; }
     .search .results li img {
       float: left;
       width: 3.125rem;
